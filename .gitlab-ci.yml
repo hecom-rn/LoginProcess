@@ -1,0 +1,20 @@
+image: node:latest
+
+eslint:
+  stage: test
+  script:
+    - npm install -g eslint babel-eslint eslint-plugin-import eslint-plugin-react eslint-plugin-react-native
+    - echo $ESLINTRC_JS > .eslintrc.js
+    - eslint src/*.js
+
+publish:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - npm install -g uglify-es
+    - mkdir -p dist
+    - uglifyjs -c -m --ecma 5 src/index.js -o dist/index.js
+    - echo -n '//registry.npmjs.org/:_authToken=' > ~/.npmrc
+    - echo $NPM_TOKEN >> ~/.npmrc
+    - npm publish --access public

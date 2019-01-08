@@ -1,0 +1,16 @@
+{
+  "name": "@hecom/loginprocess",
+  "version": "0.0.1",
+  "description": "Login Process Module",
+  "main": "dist/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:hecom/loginprocess.git"
+  },
+  "author": "Xiaosong Gao",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native-general-listener": "*"
+  }
+}
