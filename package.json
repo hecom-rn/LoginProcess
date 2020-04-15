@@ -2,15 +2,26 @@
   "name": "@hecom/loginprocess",
   "version": "1.0.0",
   "description": "Login Process Module",
-  "main": "dist/index.js",
-  "scripts": {},
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --passWithNoTests",
+    "patch": "npm version patch -m 'Bump version %s';git push origin master --tags",
+    "minor": "npm version minor -m 'Bump version %s';git push origin master --tags"
+  },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:hecom/loginprocess.git"
+    "url": "https://github.com/hecom-rn/loginprocess.git"
   },
-  "author": "Xiaosong Gao",
+  "author": "Hecom",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
-    "react-native-general-listener": "*"
+    "@hecom/listener": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "jest": "^24.8.0"
   }
 }

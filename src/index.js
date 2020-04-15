@@ -1,4 +1,4 @@
-import Listener from 'react-native-general-listener';
+import Listener from '@hecom/listener';
 
 const rootNode = {
     event: {},

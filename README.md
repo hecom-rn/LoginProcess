@@ -1,6 +1,7 @@
 # LoginProcess
 
 [![npm version](https://img.shields.io/npm/v/@hecom/loginprocess.svg?style=flat)](https://www.npmjs.com/package/@hecom/loginprocess)
+[![Build Status](https://travis-ci.org/hecom-rn/loginprocess.svg?branch=master)](https://travis-ci.org/hecom-rn/loginprocess)
 
 这是登陆进度管理模块，包括触发事件、注册事件监听和占用的权重。
 
