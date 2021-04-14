@@ -1,6 +1,6 @@
 {
   "name": "@hecom/loginprocess",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Login Process Module",
   "main": "src/index.js",
   "types": "./index.d.ts",
