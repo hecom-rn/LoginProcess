@@ -35,11 +35,11 @@ declare module "@hecom/loginprocess" {
     export function mark(name: string, isSuccess: boolean);
     
     /**
-     * 开始登录
+     * 开始登录 (只计算register 时包含name的func)
      * 1. 强制登录时, 任一失败则 reject
      * 2. 非强制登录时, 不管成功与否都会 resolve
      * @export
      * @return {*}  {Promise} 登录状态
      */
-    export function startLoginProcess(): Promise;
+    export function startLoginProcess(): Promise<void>;
 }
