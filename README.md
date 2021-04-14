@@ -29,6 +29,4 @@ import LoginProcess from '@hecom/loginprocess';
 * `triggerLogin: (forceUpdate) => void`：触发登陆事件，`forceUpdate`表示是否强制更新。
 * `triggerLogout: (forceClear) => void`：触发登出事件，`forceClear`表示是否强制登出。
 * `mark: (name, isSuccess) => void`：标记某个进度项为成功或失败状态。
-* `getCount: () => number`：获取所有进度项的权重总和。
-* `start: (callback) => void`：设置进度项状态变化的回调函数。
-* `finish: () => void`：清除进度项状态变化的回调函数。
+* `startLoginProcess: () => promise`：开始登录时调用，返回登录状态。

@@ -2,22 +2,48 @@ import Listener from '@hecom/listener';
 
 const rootNode = {
     event: {},
-    callback: undefined,
+    status: null,
+    isForce: false,
+    finished: [],
 };
+
+class Deferred {
+    constructor() {
+        this.promise = new Promise((resolve, reject) => {
+            this.resolve = resolve;
+            this.reject = reject;
+        });
+    }
+}
 
 const LoginEvent = 'loginuser';
 const LogoutEvent = 'logoutuser';
 
 export default {
     register: _register,
-    registerEvent: _registerEvent,
     triggerLogin: _trigger(LoginEvent),
     triggerLogout: _trigger(LogoutEvent),
     mark: _mark,
-    getCount: _getCount,
-    start: _start,
-    finish: _finish,
+
+    startLoginProcess: _startLoginProcess,
 };
+
+function _startLoginProcess(isForce) {
+    _reset();
+    rootNode.isForce = isForce;
+    if (!rootNode.status) {
+        rootNode.status = new Deferred();
+    }
+    // 触发注册的登录事件
+    Listener.trigger(LoginEvent, isForce);
+    return rootNode.status.promise;
+}
+
+function _reset() {
+    rootNode.finished = [];
+    rootNode.status = null;
+    rootNode.isForce = false;
+}
 
 function _register(loginFunc, logoutFunc, flex, name) {
     if (loginFunc) {
@@ -31,10 +57,6 @@ function _register(loginFunc, logoutFunc, flex, name) {
     }
 }
 
-function _registerEvent(flex, name) {
-    _register(undefined, undefined, flex, name);
-}
-
 function _trigger(eventType) {
     return function (isForce) {
         Listener.trigger(eventType, isForce);
@@ -42,18 +64,18 @@ function _trigger(eventType) {
 }
 
 function _mark(name, isSuccess) {
-    console.log(name + ' is loaded ' + (isSuccess ? 'success' : 'fail'));
-    rootNode.callback && rootNode.callback(name, rootNode.event[name], isSuccess);
-}
+    console.log('loginprocess: ' +  name + ' is loaded ' + (isSuccess ? 'success' : 'fail'));
 
-function _getCount() {
-    return Object.values(rootNode.event).reduce((p, c) => p + c, 0);
-}
+    if (rootNode.finished.includes(name)) return; 
+    rootNode.finished.push(name);  // 防止一个被标记多次
 
-function _start(callback) {
-    rootNode.callback = callback;
-}
-
-function _finish() {
-    rootNode.callback = undefined;
+    if (!isSuccess && rootNode.isForce && !!rootNode.status) {
+        rootNode.status.reject();   // 强制登录时失败
+        _reset();
+    } else if (!!rootNode.status) {
+        if (rootNode.finished.length >= Object.keys(rootNode.event).length) {
+            rootNode.status.resolve();
+            _reset();
+        }
+    }
 }

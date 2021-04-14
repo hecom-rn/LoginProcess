@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Login Process Module",
   "main": "src/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests",
     "major": "npm version major -m 'Bump version %s';git push origin master --tags",
