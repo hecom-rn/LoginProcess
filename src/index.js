@@ -64,12 +64,15 @@ function _trigger(eventType) {
 }
 
 function _mark(name, isSuccess, error) {
-    console.log('loginprocess: ' +  name + ' is loaded ' + (isSuccess ? 'success' : 'fail'));
+    console.log('loginprocess: ' + name + ' is loaded ' + (isSuccess ? 'success' : 'fail'));
 
     if (rootNode.finished.includes(name)) return;
     rootNode.finished.push(name);  // 防止一个被标记多次
 
     if (!isSuccess && rootNode.isForce && !!rootNode.status) {
+        if (error && typeof error === 'object') {
+            error.event = name
+        }
         rootNode.status.reject(error);   // 强制登录时失败
         _reset();
     } else if (!!rootNode.status) {
