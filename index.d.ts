@@ -26,14 +26,15 @@ declare module "@hecom/loginprocess" {
     export function triggerLogout(): void;
 
     /**
-     *  表示register loginFunc 执行成功或者失败  
+     *  表示register loginFunc 执行成功或者失败
      *  当register name 不为空时，必须调用该函数
      * @export
      * @param {string} name
      * @param {boolean} isSuccess
+     * @param {Error} error 失败时的错误信息
      */
-    export function mark(name: string, isSuccess: boolean);
-    
+    export function mark(name: string, isSuccess: boolean, error: Error);
+
     /**
      * 开始登录 (只计算register 时包含name的func)
      * 1. 强制登录时, 任一失败则 reject

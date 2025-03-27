@@ -63,14 +63,14 @@ function _trigger(eventType) {
     };
 }
 
-function _mark(name, isSuccess) {
+function _mark(name, isSuccess, error) {
     console.log('loginprocess: ' +  name + ' is loaded ' + (isSuccess ? 'success' : 'fail'));
 
-    if (rootNode.finished.includes(name)) return; 
+    if (rootNode.finished.includes(name)) return;
     rootNode.finished.push(name);  // 防止一个被标记多次
 
     if (!isSuccess && rootNode.isForce && !!rootNode.status) {
-        rootNode.status.reject();   // 强制登录时失败
+        rootNode.status.reject(error);   // 强制登录时失败
         _reset();
     } else if (!!rootNode.status) {
         if (rootNode.finished.length >= Object.keys(rootNode.event).length) {

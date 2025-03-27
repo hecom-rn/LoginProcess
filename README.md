@@ -28,5 +28,5 @@ import LoginProcess from '@hecom/loginprocess';
 * `registerEvent: (flex, name) => void`：只注册进度条的进度项，调用`register`完成操作。
 * `triggerLogin: (forceUpdate) => void`：触发登陆事件，`forceUpdate`表示是否强制更新。
 * `triggerLogout: (forceClear) => void`：触发登出事件，`forceClear`表示是否强制登出。
-* `mark: (name, isSuccess) => void`：标记某个进度项为成功或失败状态。
+* `mark: (name, isSuccess, error) => void`：标记某个进度项为成功或失败状态。
 * `startLoginProcess: () => promise`：开始登录时调用，返回登录状态。
