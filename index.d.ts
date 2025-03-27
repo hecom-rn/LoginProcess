@@ -33,7 +33,9 @@ declare module "@hecom/loginprocess" {
      * @param {boolean} isSuccess
      * @param {Error} error 失败时的错误信息
      */
-    export function mark(name: string, isSuccess: boolean, error: Error);
+    export function mark(name: string, isSuccess: false, error: Error): void;
+
+    export function mark(name: string, isSuccess: true): void;
 
     /**
      * 开始登录 (只计算register 时包含name的func)
